@@ -101,23 +101,23 @@ def compare_products(request, daraz_id, amazon_id):
 
 
 
-# Test view
-from celery import shared_task
-from .models import AmazonProduct, AmazonPriceHistory, DarazProduct, DarazPriceHistory
-from datetime import datetime
+# # Test view
+# from celery import shared_task
+# from .models import AmazonProduct, AmazonPriceHistory, DarazProduct, DarazPriceHistory
+# from datetime import datetime
 
-@shared_task
-def update_product_prices():
-    # Example for Amazon
-    for product in AmazonProduct.objects.all():
-        # Scrape the current price (use your scraping function here)
-        current_price = scrape_amazon_price(product.name)  # Replace with your scraping logic
+# @shared_task
+# def update_product_prices():
+#     # Example for Amazon
+#     for product in AmazonProduct.objects.all():
+#         # Scrape the current price (use your scraping function here)
+#         current_price = scrape_amazon_price(product.name)  # Replace with your scraping logic
 
-        if product.current_price != current_price:
-            # Update current price
-            product.current_price = current_price
-            product.last_updated = datetime.now()
-            product.save()
+#         if product.current_price != current_price:
+#             # Update current price
+#             product.current_price = current_price
+#             product.last_updated = datetime.now()
+#             product.save()
 
-            # Add entry to price history
-            AmazonPriceHistory.objects.create(product=product, price=current_price)
+#             # Add entry to price history
+#             AmazonPriceHistory.objects.create(product=product, price=current_price)

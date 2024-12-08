@@ -1,19 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Amazon Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 250px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .product-card h2 {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #343a40;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .product-card button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .product-card button:hover {
+            background-color: #218838;
+        }
+        .product-card a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .product-card a button {
+            background-color: #007bff;
+            padding: 8px 15px;
+        }
+        .product-card a button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Select a Product from Amazon</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <select name="amazon_product">
+    <div class="container">
+        <h1>Select a Product from Amazon</h1>
+        <div class="product-list">
             {% for product in products %}
-                <option value="{{ product.id }}">{{ product.name }} - Rs. {{ product.price }}</option>
+            <div class="product-card">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="amazon_product" value="{{ product.id }}">
+                    <img src="{{ product.url }}" alt="{{ product.name }}">
+                    <h2>{{ product.name }}</h2>
+                    <p>Price: Rs. {{ product.price }}</p>
+                    <a href="{{ product.url }}" target="_blank">
+                        <button type="button">Visit Website</button>
+                    </a>
+                    <button type="submit">Select</button>
+                </form>
+            </div>
             {% endfor %}
-        </select>
-        <button type="submit">Compare</button>
-    </form>
-    
+        </div>
+    </div>
 </body>
 </html>

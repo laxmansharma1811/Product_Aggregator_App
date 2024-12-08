@@ -8,7 +8,7 @@ class DarazProduct(models.Model):
     actual_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     rating = models.FloatField(null=True, blank=True)  # FloatField for ratings
     color = models.CharField(max_length=50, null=True, blank=True)
-    price_history = models.JSONField(default=list)
+    # price_history = models.JSONField(default=list)
 
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class AmazonProduct(models.Model):
     reviews = models.CharField(max_length=50, null=True, blank=True)
     manufacturer = models.CharField(max_length=100, null=True, blank=True)
     asin = models.CharField(max_length=50, null=True, blank=True)
-    price_history = models.JSONField(default=list)
+    # price_history = models.JSONField(default=list)
 
     def __str__(self):
         return self.name
